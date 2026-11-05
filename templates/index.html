@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MindMetric AI · Student Mental Health Score Predictor</title>
+<meta name="description" content="Predict a student's mental health score from lifestyle and social media habits with a machine learning model.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<div id="progress" aria-hidden="true"></div>
+<canvas id="particles" aria-hidden="true"></canvas>
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+
+<header class="nav" id="nav">
+  <a class="brand" href="#top"><span class="logo" data-i="brain"></span>MindMetric<b>AI</b></a>
+  <nav class="links" id="links">
+    <a href="#predictor">Predictor</a><a href="#how">How it works</a><a href="#about">About</a><a href="#faq">FAQ</a>
+  </nav>
+  <div class="nav-r">
+    <button class="icon-btn" id="theme" aria-label="Toggle theme" data-i="moon"></button>
+    <button class="icon-btn menu" id="menu" aria-label="Menu" data-i="menu"></button>
+  </div>
+</header>
+
+<main id="top">
+<!-- 404 view (shown when ?e=404) -->
+<section class="nf" id="notfound" hidden>
+  <h1>404</h1><p>This page doesn't exist. Head back and run a prediction instead.</p>
+  <a class="btn" href="/">Back to the predictor</a>
+</section>
+
+<div id="app">
+<section class="hero">
+  <div class="hero-txt">
+    <span class="pill"><i></i>Random forest model · trained on student data</span>
+    <h1>Understand a student's mental health from everyday habits.</h1>
+    <p class="sub">Enter sleep, screen time, study load and stress. Our model returns a mental health score with tailored suggestions in seconds.</p>
+    <div class="cta">
+      <a class="btn ripple" href="#predictor">Predict a score</a>
+      <a class="btn ghost ripple" href="#how">See how it works</a>
+    </div>
+  </div>
+  <div class="orb-wrap" aria-hidden="true">
+    <svg class="orb" viewBox="0 0 400 400">
+      <defs>
+        <radialGradient id="g1" cx="35%" cy="30%"><stop offset="0" stop-color="#C4B5FD"/><stop offset=".45" stop-color="#7C3AED"/><stop offset="1" stop-color="#1E1040"/></radialGradient>
+        <linearGradient id="g2" x1="0" x2="1"><stop offset="0" stop-color="#A855F7"/><stop offset="1" stop-color="#6366F1"/></linearGradient>
+      </defs>
+      <circle cx="200" cy="200" r="150" fill="url(#g1)"/>
+      <g fill="none" stroke="url(#g2)" stroke-width="1.5" opacity=".8">
+        <ellipse class="ring r1" cx="200" cy="200" rx="185" ry="60"/>
+        <ellipse class="ring r2" cx="200" cy="200" rx="185" ry="60"/>
+        <circle cx="200" cy="200" r="190" stroke-dasharray="2 10"/>
+      </g>
+      <g fill="#fff" class="nodes"><circle cx="150" cy="170" r="5"/><circle cx="240" cy="140" r="4"/><circle cx="260" cy="230" r="6"/><circle cx="170" cy="260" r="4"/><circle cx="205" cy="200" r="7"/></g>
+      <g stroke="#fff" stroke-opacity=".5"><path d="M150 170L205 200L240 140M205 200L260 230M205 200L170 260"/></g>
+    </svg>
+    <div class="chip c1"><span data-i="moon"></span>Sleep 7.5h</div>
+    <div class="chip c2"><span data-i="phone"></span>Screen 4.2h</div>
+    <div class="chip c3"><span data-i="spark"></span>Score 8.2</div>
+  </div>
+</section>
+
+<section class="sec" id="predictor">
+  <div class="sec-h"><h2>Your lifestyle profile</h2><p>Fill in three short sections. Every field is required.</p></div>
+  <form id="form" novalidate>
+    <div class="grid">
+      <fieldset class="card">
+        <legend><span data-i="user"></span>Personal information</legend>
+        <div class="f"><input id="age" name="age" type="number" min="15" max="60" step="1" placeholder=" " required><label for="age">Age</label><small></small></div>
+        <div class="f s"><select id="gender" name="gender" required><option value="" disabled selected></option><option>Male</option><option>Female</option></select><label for="gender">Gender</label><small></small></div>
+        <div class="f s"><select id="country" name="country" required><option value="" disabled selected></option></select><label for="country">Country</label><small></small></div>
+        <div class="f s"><select id="academic_level" name="academic_level" required><option value="" disabled selected></option><option>Undergraduate</option><option>Graduate</option><option>Postgraduate</option></select><label for="academic_level">Academic level</label><small></small></div>
+      </fieldset>
+      <fieldset class="card">
+        <legend><span data-i="phone"></span>Social media usage</legend>
+        <div class="f s"><select id="most_used_platform" name="most_used_platform" required><option value="" disabled selected></option></select><label for="most_used_platform">Most used platform</label><small></small></div>
+        <div class="f s"><select id="purpose_of_use" name="purpose_of_use" required><option value="" disabled selected></option><option>Networking</option><option>Education</option><option>Entertainment</option><option>News</option></select><label for="purpose_of_use">Main purpose</label><small></small></div>
+        <div class="f"><input id="avg_daily_usage_hours" name="avg_daily_usage_hours" type="number" min="0" max="24" step="0.1" placeholder=" " required><label for="avg_daily_usage_hours">Daily usage (hours)</label><small></small></div>
+        <div class="f"><input id="daily_unlocks" name="daily_unlocks" type="number" min="0" max="500" step="1" placeholder=" " required><label for="daily_unlocks">Phone unlocks per day</label><small></small></div>
+      </fieldset>
+      <fieldset class="card">
+        <legend><span data-i="heart"></span>Lifestyle</legend>
+        <div class="f"><input id="study_hours" name="study_hours" type="number" min="0" max="24" step="0.1" placeholder=" " required><label for="study_hours">Study hours per day</label><small></small></div>
+        <div class="f"><input id="sleep_hours_per_night" name="sleep_hours_per_night" type="number" min="0" max="24" step="0.1" placeholder=" " required><label for="sleep_hours_per_night">Sleep hours per night</label><small></small></div>
+        <div class="f"><input id="physical_activity_hours" name="physical_activity_hours" type="number" min="0" max="24" step="0.1" placeholder=" " required><label for="physical_activity_hours">Physical activity (hours)</label><small></small></div>
+        <div class="f s"><select id="stress_level" name="stress_level" required><option value="" disabled selected></option><option>Low</option><option>Medium</option><option>High</option><option>Very High</option></select><label for="stress_level">Stress level</label><small></small></div>
+      </fieldset>
+    </div>
+    <div class="submit">
+      <button class="btn big ripple" id="predict" type="submit"><span class="spin"></span><span class="lbl">Predict mental health score</span></button>
+      <button class="link" id="reset" type="button">Clear form</button>
+    </div>
+  </form>
+
+  <div class="result" id="result" hidden>
+    <div class="glass res-card">
+      <div class="gauge">
+        <svg viewBox="0 0 140 140"><circle class="trk" cx="70" cy="70" r="60"/><circle class="bar" id="bar" cx="70" cy="70" r="60" transform="rotate(-90 70 70)"/></svg>
+        <div class="gv"><strong id="score">0</strong><span>out of 10</span></div>
+      </div>
+      <div class="res-t"><span class="tag" id="tag"></span><h3 id="rtitle"></h3><p id="rdesc"></p></div>
+    </div>
+    <div class="glass rec-card"><h3><span data-i="spark"></span>AI recommendations</h3><ul id="recs"></ul>
+      <p class="note">Educational estimate only. It is not a medical diagnosis. If you are struggling, please talk to a qualified professional.</p></div>
+  </div>
+</section>
+
+<section class="sec" id="how">
+  <div class="sec-h"><h2>How it works</h2><p>From a few answers to a score in three steps.</p></div>
+  <ol class="steps">
+    <li class="glass"><span class="n">1</span><h4>Describe the student</h4><p>Share age, background, social media habits and daily routine.</p></li>
+    <li class="glass"><span class="n">2</span><h4>Model runs on your inputs</h4><p>The request goes to a FastAPI service that feeds a trained scikit-learn pipeline.</p></li>
+    <li class="glass"><span class="n">3</span><h4>Read score and next steps</h4><p>See the score on a gauge with suggestions matched to the result and your habits.</p></li>
+  </ol>
+</section>
+
+<section class="sec" id="about">
+  <div class="sec-h"><h2>About the project</h2></div>
+  <div class="glass about">
+    <p>This project predicts a student's mental health score from lifestyle and social media usage data. A scikit-learn pipeline is served through FastAPI, and this interface calls it with the Fetch API.</p>
+    <div class="stats"><div><b>12</b><span>input features</span></div><div><b>FastAPI</b><span>backend</span></div><div><b>0</b><span>frameworks on the frontend</span></div></div>
+  </div>
+</section>
+
+<section class="sec narrow" id="faq">
+  <div class="sec-h"><h2>Frequently asked questions</h2></div>
+  <details class="glass"><summary>Is this a medical diagnosis?</summary><p>No. It is a statistical estimate based on patterns in a dataset. It cannot replace a clinician.</p></details>
+  <details class="glass"><summary>Is my data stored?</summary><p>This interface does not store anything. Inputs are sent to the prediction API and the result is shown in your browser.</p></details>
+  <details class="glass"><summary>How accurate is the score?</summary><p>Accuracy depends on the training data, which covers a specific student population. Treat the score as a guide, not a measurement.</p></details>
+  <details class="glass"><summary>What does the score range mean?</summary><p>90 and above is excellent, 70 to 90 is healthy, 50 to 70 is moderate, and below 50 needs attention.</p></details>
+</section>
+</div>
+</main>
+
+<footer class="foot"><span>© 2026 MindMetric AI · Built with FastAPI, scikit-learn, HTML, CSS and JavaScript</span><a href="#top">Back to top</a></footer>
+<button id="totop" class="icon-btn" aria-label="Back to top" data-i="up"></button>
+
+<div class="overlay" id="overlay" hidden><div class="ring-load"></div><p id="ovmsg">Analyzing lifestyle...</p></div>
+<div id="toasts" aria-live="polite"></div>
+<script src="/static/js/app.js"></script>
+</body>
+</html>
