@@ -6,9 +6,7 @@ A full-stack machine learning web app that predicts a student's **mental health 
 
 ## Screenshot
 
-<p align="center">
-  <img src="images/ui-preview.jpeg" alt="AI-Powered Student Mental Health Score Predictor interface" width="420">
-</p>
+Project UI Pic.jpeg
 
 ## Features
 
