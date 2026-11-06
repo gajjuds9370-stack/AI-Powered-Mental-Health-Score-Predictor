@@ -1,15 +1,14 @@
-
 # AI-Powered Student Mental Health Score Predictor
 
 A full-stack machine learning web app that predicts a student's **mental health score (0–10)** from social media usage and lifestyle habits. A scikit-learn Random Forest pipeline is served by **FastAPI**, with a custom dark glassmorphism interface built in pure **HTML, CSS and JavaScript**.
 
 > Educational project. The score is a statistical estimate and **not** a medical diagnosis.
 
-## Screenshots
+## Screenshot
 
-| Landing page | Prediction form | Result |
-|---|---|---|
-| ![Landing](images/landing.png) | ![Form](images/form.png) | ![Result](images/result.png) |
+<p align="center">
+  <img src="images/ui-preview.jpeg" alt="AI-Powered Student Mental Health Score Predictor interface" width="420">
+</p>
 
 ## Features
 
@@ -121,7 +120,3 @@ Open **http://127.0.0.1:8000**.
 ## Disclaimer
 
 This project is for learning and demonstration. It is not a clinical tool. If you or someone you know is struggling, please contact a qualified mental health professional.
-
-
-
-Live Link :- https://ai-powered-mental-health-score-predictor-awys.onrender.com/
