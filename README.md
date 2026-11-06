@@ -6,7 +6,7 @@ A full-stack machine learning web app that predicts a student's **mental health 
 
 ## Screenshot
 
-Project UI Pic.jpeg
+![Project UI](images/ui-preview.jpeg)
 
 ## Features
 
