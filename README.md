@@ -4,9 +4,9 @@ A full-stack machine learning web app that predicts a student's **mental health 
 
 > Educational project. The score is a statistical estimate and **not** a medical diagnosis.
 
-## Screenshot
+## Projects Live Link
 
- ![Project UI](Project UI Pic.jpeg)
+ https://ai-powered-mental-health-score-predictor-awys.onrender.com/
 
 ## Features
 
